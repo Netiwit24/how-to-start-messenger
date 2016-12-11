@@ -25,7 +25,7 @@ app.post('/webhook/', function (req, res) {
     if (event.message && event.message.text) {
       let text = event.message.text
       var location = event.message.text
-      var weatherEndpoint = 'http://api.openweathermap.org/data/2.5/weather?q=aa119f714f9d167e72f25c2865a19f99' + location + '&units=metric&appid=0dbe38b9e115ada0ec62580a7a34a185'
+      var weatherEndpoint = 'http://api.openweathermap.org/data/2.5/weather?q=' + location + '&units=metric&appid=aa119f714f9d167e72f25c2865a19f99'
       request({
         url: weatherEndpoint,
         json: true
@@ -35,7 +35,7 @@ app.post('/webhook/', function (req, res) {
           sendTextMessage(sender, "Today is " + condition.temp + "Celsius in " + location)
         } catch (err) {
           console.error('error caught', err)
-          sendTextMessage(sender, "There was an error.")
+          sendTextMessage(sender , "There was an error.")
         }
       })
       if (text === 'Generic') {
