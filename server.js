@@ -28,7 +28,21 @@ app.post('/webhook/', function (req, res) {
         sendGenericMessage(sender)
         continue
       }
-      sendTextMessage(sender, 'Text received, echo: ' + text.substring(0, 200))
+      text = text.toLowerCase()
+      if (text === 'help') {
+        var mass = 'gmm = 1 rs = 2 others = 3'
+        sendTextMessage(sender, mass)
+      } else if (text === '1') {
+        let link = 'https://www.youtube.com/user/gmmgrammyofficial'
+        sendTextMessage(sender, link)
+      } else if (text === '2') {
+        let link = 'https://www.youtube.com/user/RSVDO'
+        sendTextMessage(sender, link)
+      } else if (text === '3') {
+        let link = 'https://www.youtube.com/user/MetallicaTV'
+        sendTextMessage(sender, link)
+      }
+      sendTextMessage(sender, 'พิมพ์ help เพื่อเปิดเมนู')
     }
     if (event.postback) {
       let text = JSON.stringify(event.postback)
