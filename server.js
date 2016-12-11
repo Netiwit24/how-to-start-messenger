@@ -4,7 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
-const token = 'key'
+const token = 'EAACAZAwmFBlQBABx1DJs7eC9ZCGCwBJBlEka39ABNhfWIvZBPiRfNBbcQwZAw0nBx1wNV31ZBsHuhpZAkRbZAZB7tCK6bgZBGM4xnMGZAVQjIczRBTkyGGa3OYCh1zaSXGXXZAl3gCpvGZBs5NMipZBLd4sqFLFoe7DnwaXfja643LHREEgZDZD'
 app.set('port', (process.env.PORT || 5000))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
@@ -12,7 +12,7 @@ app.get('/', function (req, res) {
   res.send('test test')
 })
 app.get('/webhook/', function (req, res) {
-  if (req.query['hub.verify_token'] === '') {
+  if (req.query['hub.verify_token'] === '1234') {
     res.send(req.query['hub.challenge'])
   }
   res.send('Error, wrong token')
