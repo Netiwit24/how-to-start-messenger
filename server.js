@@ -24,23 +24,23 @@ app.post('/webhook/', function (req, res) {
     let sender = event.sender.id
     if (event.message && event.message.text) {
       let text = event.message.text
+      var location = event.message.text
+      var weatherEndpoint = 'http://api.openweathermap.org/data/2.5/weather?q=aa119f714f9d167e72f25c2865a19f99' + location + '&units=metric&appid=0dbe38b9e115ada0ec62580a7a34a185'
+      request({
+        url: weatherEndpoint,
+        json: true
+      }, function (error, response, body) {
+        try {
+          var condition = body.main
+          sendTextMessage(sender, "Today is " + condition.temp + "Celsius in " + location)
+        } catch (err) {
+          console.error('error caught', err)
+          sendTextMessage(sender, "There was an error.")
+        }
+      })
       if (text === 'Generic') {
         sendGenericMessage(sender)
         continue
-      }
-      text = text.toLowerCase()
-      if (text === 'help') {
-        var mass = 'gmm = 1 rs = 2 others = 3'
-        sendTextMessage(sender, mass)
-      } else if (text === '1') {
-        let link = 'https://www.youtube.com/user/gmmgrammyofficial'
-        sendTextMessage(sender, link)
-      } else if (text === '2') {
-        let link = 'https://www.youtube.com/user/RSVDO'
-        sendTextMessage(sender, link)
-      } else if (text === '3') {
-        let link = 'https://www.youtube.com/user/MetallicaTV'
-        sendTextMessage(sender, link)
       }
       sendTextMessage(sender, 'พิมพ์ help เพื่อเปิดเมนู')
     }
